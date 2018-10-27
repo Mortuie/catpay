@@ -1,9 +1,21 @@
 import React, { Component } from "react";
 import { Text, View, TextInput, Button } from "react-native";
 import styled from "styled-components/native";
+import Header from "./Header";
 
 type Props = {};
 export default class Giver extends Component<Props> {
+  static navigationOptions = {
+    drawerLabel: "Giver",
+    headerLeft: <Button title="=" color="black" />,
+    headerRight: (
+      <Button
+        onPress={() => alert("This is a button!")}
+        title="Info"
+        color="black"
+      />
+    )
+  };
   state = {
     thema: "",
     besch: "",
@@ -14,6 +26,7 @@ export default class Giver extends Component<Props> {
   };
 
   render() {
+    console.log(this.state);
     return (
       <View>
         <TextInput

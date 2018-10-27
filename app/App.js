@@ -7,28 +7,19 @@
  */
 
 import React, { Component } from "react";
-import { Platform, StyleSheet, Text, View } from "react-native";
+import { Platform, StyleSheet, Text, View, Button } from "react-native";
 import NFC from "./NFC";
 import styled from "styled-components/native";
 import { Register } from "./User";
 import { Header, Giver, Worker } from "./MainView";
-import { createStackNavigator } from "react-navigation";
+import {
+  createStackNavigator,
+  createSwitchNavigator,
+  createDrawerNavigator
+} from "react-navigation";
 
-const MainContainer = styled.View`
-  background-color: #f5fcff;
-`;
-
-// export default class App extends Component {
-//   render() {
-//     return <MainComponent />;
-//   }
-// }
-
-export default createStackNavigator(
+const App2 = createDrawerNavigator(
   {
-    Register: {
-      screen: Register
-    },
     Giver: {
       screen: Giver
     },
@@ -37,6 +28,38 @@ export default createStackNavigator(
     }
   },
   {
+    initialRouteName: "Giver"
+  }
+);
+
+const App = createStackNavigator(
+  {
+    App: App2
+  },
+  {
+    navigationOptions: ({ navigation }) => ({
+      headerLeft: <Button onPress={() => navigation.toggleDrawer()} title="=" />
+    })
+  }
+);
+
+const Auth = createStackNavigator(
+  {
+    Register: {
+      screen: Register
+    }
+  },
+  {
     initialRouteName: "Register"
+  }
+);
+
+export default createSwitchNavigator(
+  {
+    Auth: Auth,
+    App: App
+  },
+  {
+    initialRouteName: "Auth"
   }
 );

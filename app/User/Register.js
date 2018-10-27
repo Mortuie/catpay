@@ -4,6 +4,8 @@ import styled from "styled-components/native";
 
 type Props = {};
 export default class Register extends Component<Props> {
+  static navigationOptions = { title: "Welcome", header: null };
+
   state = {
     username: "",
     telephone: "",
@@ -15,6 +17,7 @@ export default class Register extends Component<Props> {
     try {
       await AsyncStorage.setItem("user", JSON.stringify(this.state));
       console.log(await AsyncStorage.getItem("user"));
+      this.props.navigation.navigate("App");
     } catch (error) {
       console.log(error);
     }

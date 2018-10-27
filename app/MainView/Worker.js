@@ -1,15 +1,22 @@
 import React, { Component } from "react";
 import { Text, View, TextInput, Button } from "react-native";
 import styled from "styled-components/native";
+import WorkView from "./WorkView";
 
-type Props = {};
-export default class Giver extends Component<Props> {
+export default class Worker extends Component {
   state = {};
 
   render() {
     return (
       <View>
-        <Text>Hello.</Text>
+        <WorkView />
+        <WorkView />
+        <WorkView />
+        <WorkView />
+        <WorkView />
+        <WorkView />
+        <WorkView />
+        <WorkView />
       </View>
     );
   }
