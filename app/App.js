@@ -10,6 +10,7 @@ import React, { Component } from "react";
 import { Platform, StyleSheet, Text, View } from "react-native";
 import NFC from "./NFC";
 import styled from "styled-components/native";
+import { Register } from "./User";
 
 const MainContainer = styled.View`
   flex: 1;
@@ -22,9 +23,9 @@ type Props = {};
 export default class App extends Component<Props> {
   render() {
     return (
-      <View>
-        <NFC />
-      </View>
+      <MainContainer>
+        <Register />
+      </MainContainer>
     );
   }
 }
