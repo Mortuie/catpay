@@ -21,7 +21,7 @@ export default class Register extends Component<Props> {
   };
 
   render() {
-    console.log(this.state);
+    console.log(this.props);
     return (
       <View>
         <TextInput

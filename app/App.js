@@ -11,21 +11,32 @@ import { Platform, StyleSheet, Text, View } from "react-native";
 import NFC from "./NFC";
 import styled from "styled-components/native";
 import { Register } from "./User";
+import { Header, Giver, Worker } from "./MainView";
+import { createStackNavigator } from "react-navigation";
 
 const MainContainer = styled.View`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
   background-color: #f5fcff;
 `;
 
-type Props = {};
-export default class App extends Component<Props> {
-  render() {
-    return (
-      <MainContainer>
-        <Register />
-      </MainContainer>
-    );
+// export default class App extends Component {
+//   render() {
+//     return <MainComponent />;
+//   }
+// }
+
+export default createStackNavigator(
+  {
+    Register: {
+      screen: Register
+    },
+    Giver: {
+      screen: Giver
+    },
+    Worker: {
+      screen: Worker
+    }
+  },
+  {
+    initialRouteName: "Register"
   }
-}
+);
