@@ -7,8 +7,7 @@
  */
 
 import React, { Component } from "react";
-import { Platform, StyleSheet, Text, View, Button } from "react-native";
-import NFC from "./NFC";
+import { Button } from "react-native";
 import styled from "styled-components/native";
 import { Register } from "./User";
 import { Header, Giver, Worker } from "./MainView";
@@ -17,6 +16,11 @@ import {
   createSwitchNavigator,
   createDrawerNavigator
 } from "react-navigation";
+console.disableYellowBox = true;
+
+const Drawer = styled.Button`
+  margin-left: 50px;
+`;
 
 const App2 = createDrawerNavigator(
   {
@@ -38,7 +42,7 @@ const App = createStackNavigator(
   },
   {
     navigationOptions: ({ navigation }) => ({
-      headerLeft: <Button onPress={() => navigation.toggleDrawer()} title="=" />
+      headerLeft: <Drawer onPress={() => navigation.toggleDrawer()} title="=" />
     })
   }
 );

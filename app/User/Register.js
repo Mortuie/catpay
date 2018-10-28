@@ -56,28 +56,6 @@ export default class Register extends Component {
           onChangeText={text => this.setState({ username: text })}
           placeholder={"Username"}
         />
-        <TextInput
-          value={this.state.telephone}
-          onChangeText={text => this.setState({ telephone: text })}
-          placeholder={"Telephone number"}
-        />
-        <TextInput
-          value={this.state.iban}
-          onChangeText={text => this.setState({ iban: text })}
-          placeholder={"IBAN number"}
-        />
-        <Text>RFID: {this.state.rfid}</Text>
-        <Button
-          title="Add your RFID"
-          onPress={() =>
-            Alert.alert("XDDDD", "Well Hello THere", [
-              {
-                text: "teheheh",
-                onPress: this._startDetection
-              }
-            ])
-          }
-        />
         <Button title="Register" onPress={this.persistData} />
       </View>
     );
@@ -148,7 +126,7 @@ export default class Register extends Component {
 
     let text = this._parseText(tag);
     console.log("TEXT: ", parseInt(text));
-    ToastAndroid.show("HHAHAHHAH", ToastAndroid.SHORT);
+    ToastAndroid.show("RFID has been read.", ToastAndroid.SHORT);
     this._stopDetection();
     this.setState({ rfid: parseInt(text) });
   };

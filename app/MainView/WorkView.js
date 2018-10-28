@@ -3,11 +3,16 @@ import { Text, View, TextInput, Button, Alert } from "react-native";
 import styled from "styled-components/native";
 import NfcManager, { Ndef } from "react-native-nfc-manager";
 import { ToastAndroid } from "react-native";
+import { MA_REMOTE_SERVER } from "../Constants";
 
 const Container = styled.View`
   height: 30px;
-  background-color: grey;
+  background-color: #d6d6d6;
   margin-top: 10px;
+`;
+
+const StyledText = styled.Text`
+  font-size: 20px;
 `;
 
 export default class WorkView extends Component {
@@ -27,21 +32,36 @@ export default class WorkView extends Component {
     }
   }
 
+  sendRequest = () => {
+    console.log("WE ARE NOW SENDING THE REQUEST...");
+    fetch(MA_REMOTE_SERVER + "/v1/api/createZahlung?auftragid=" + this.props.id)
+      .then(res => {
+        if (res.ok) {
+          ToastAndroid.show("Payment has been initiated.", ToastAndroid.SHORT);
+        }
+      })
+      .catch(err => console.log(err));
+  };
+
   render() {
     return (
       <Container>
-        <Text
+        <StyledText
           onPress={() =>
-            Alert.alert("XDDDD", "Well Hello THere", [
-              {
-                text: "huehuehue",
-                onPress: this._startDetection
-              }
-            ])
+            Alert.alert(
+              "Authorise your payment",
+              "Get ready to touch your phone to the RFID.",
+              [
+                {
+                  text: "Start Scanning",
+                  onPress: this._startDetection
+                }
+              ]
+            )
           }
         >
-          I'm an auftrag...
-        </Text>
+          Thema: {this.props.thema} {this.props.repeat}/{this.props.top}
+        </StyledText>
       </Container>
     );
   }
@@ -111,7 +131,8 @@ export default class WorkView extends Component {
 
     let text = this._parseText(tag);
     console.log("TEXT: ", parseInt(text));
-    ToastAndroid.show("HHAHAHHAH", ToastAndroid.SHORT);
+    this.sendRequest();
+    ToastAndroid.show("RFID Chip has been read.", ToastAndroid.SHORT);
     this._stopDetection();
     this.setState({ parsedText: text });
   };
